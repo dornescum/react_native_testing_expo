@@ -1,6 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import {Button, StyleSheet, Text, TextInput, View, ScrollView, FlatList} from 'react-native';
 import {useState} from "react";
+import GoalItem from "./components/GoalItem";
 
 export default function App() {
   const [enteredGoalText, setEnteredGoalText] = useState('');
@@ -32,9 +33,10 @@ export default function App() {
         <View style={styles.goalsContainer}>
           <FlatList data={courseGoals} renderItem={(itemData) =>{
             return (
-                <View style={styles.goalItem}>
-                  <Text style={styles.goalText}>{itemData.item.text}</Text>
-                </View>
+                <GoalItem text={itemData.item.text}/>
+                // <View style={styles.goalItem}>
+                //   <Text style={styles.goalText}>{itemData.item.text}</Text>
+                // </View>
             )
           }}
                     keyExtractor={(item, index)=>{
@@ -48,6 +50,7 @@ export default function App() {
           {/*      <Text key={goal} style={styles.goalItem}>{goal}</Text>)}*/}
           {/*  /!*</Text>*!/*/}
           {/*</ScrollView>*/}
+          <Text></Text>
         </View>
       </View>
   );
@@ -78,14 +81,14 @@ const styles = StyleSheet.create({
   goalsContainer: {
     flex: 5,
   },
-  goalItem: {
-    margin: 8,
-    padding: 8,
-    borderRadius: 5,
-    backgroundColor: '#5e0acc',
-    color: 'white'
-  },
-  goalText:{
-    color: 'white'
-  }
+  // goalItem: {
+  //   margin: 8,
+  //   padding: 8,
+  //   borderRadius: 5,
+  //   backgroundColor: '#5e0acc',
+  //   color: 'white'
+  // },
+  // goalText:{
+  //   color: 'white'
+  // }
 });
