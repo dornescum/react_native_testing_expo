@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import {Button, StyleSheet, Text, TextInput, View, ScrollView} from 'react-native';
+import {Button, StyleSheet, Text, TextInput, View, ScrollView, FlatList} from 'react-native';
 import {useState} from "react";
 
 export default function App() {
@@ -8,12 +8,15 @@ export default function App() {
 
   function goalInputHandler(enteredText) {
     setEnteredGoalText(enteredText);
-    setEnteredGoalText('')
+    // setEnteredGoalText('')
   }
 
   function addGoalHandler() {
     console.log(enteredGoalText);
-    setCourseGoals((currentCourseGoals)=>[...currentCourseGoals, enteredGoalText])
+    // setCourseGoals((currentCourseGoals)=>[...currentCourseGoals, enteredGoalText])
+    setCourseGoals((currentCourseGoals)=>[...currentCourseGoals, {
+      text: enteredGoalText , id: Math.random().toString()
+    }])
   }
 
   return (
@@ -27,12 +30,24 @@ export default function App() {
           <Button title="Add Goal" onPress={addGoalHandler} />
         </View>
         <View style={styles.goalsContainer}>
-          <ScrollView >
-            {/*<Text>*/}
-            {courseGoals.map((goal)=>
-                <Text key={goal} style={styles.goalItem}>{goal}</Text>)}
-            {/*</Text>*/}
-          </ScrollView>
+          <FlatList data={courseGoals} renderItem={(itemData) =>{
+            return (
+                <View style={styles.goalItem}>
+                  <Text style={styles.goalText}>{itemData.item.text}</Text>
+                </View>
+            )
+          }}
+                    keyExtractor={(item, index)=>{
+                      return item.id; //dc nu am key
+                    }}
+          alwaysBounceVertical={false}
+          />
+          {/*<ScrollView >*/}
+          {/*  /!*<Text>*!/*/}
+          {/*  {courseGoals.map((goal)=>*/}
+          {/*      <Text key={goal} style={styles.goalItem}>{goal}</Text>)}*/}
+          {/*  /!*</Text>*!/*/}
+          {/*</ScrollView>*/}
         </View>
       </View>
   );
@@ -68,6 +83,9 @@ const styles = StyleSheet.create({
     padding: 8,
     borderRadius: 5,
     backgroundColor: '#5e0acc',
+    color: 'white'
+  },
+  goalText:{
     color: 'white'
   }
 });
