@@ -1,25 +1,73 @@
 import { StatusBar } from 'expo-status-bar';
-import {Button, StyleSheet, Text, View} from 'react-native';
+import {Button, StyleSheet, Text, TextInput, View, ScrollView} from 'react-native';
+import {useState} from "react";
 
 export default function App() {
+  const [enteredGoalText, setEnteredGoalText] = useState('');
+  const [courseGoals, setCourseGoals] = useState([]);
+
+  function goalInputHandler(enteredText) {
+    setEnteredGoalText(enteredText);
+    setEnteredGoalText('')
+  }
+
+  function addGoalHandler() {
+    console.log(enteredGoalText);
+    setCourseGoals((currentCourseGoals)=>[...currentCourseGoals, enteredGoalText])
+  }
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>Open up App.js app! 234</Text>
-      <Button title='test'></Button>
-      <StatusBar style="auto" />
-    </View>
+      <View style={styles.appContainer}>
+        <View style={styles.inputContainer}>
+          <TextInput
+              style={styles.textInput}
+              placeholder="Your course goal!"
+              onChangeText={goalInputHandler}
+          />
+          <Button title="Add Goal" onPress={addGoalHandler} />
+        </View>
+        <View style={styles.goalsContainer}>
+          <ScrollView >
+            {/*<Text>*/}
+            {courseGoals.map((goal)=>
+                <Text key={goal} style={styles.goalItem}>{goal}</Text>)}
+            {/*</Text>*/}
+          </ScrollView>
+        </View>
+      </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  appContainer: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    paddingTop: 50,
+    paddingHorizontal: 16,
   },
-  text: {
-    color: 'red',
-    margin: 10
+  inputContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 24,
+    borderBottomWidth: 1,
+    borderBottomColor: '#cccccc',
+  },
+  textInput: {
+    borderWidth: 1,
+    borderColor: '#cccccc',
+    width: '70%',
+    marginRight: 8,
+    padding: 8,
+  },
+  goalsContainer: {
+    flex: 5,
+  },
+  goalItem: {
+    margin: 8,
+    padding: 8,
+    borderRadius: 5,
+    backgroundColor: '#5e0acc',
+    color: 'white'
   }
 });
