@@ -1,12 +1,18 @@
 import React from 'react';
-import {Text, View, StyleSheet} from "react-native";
+import {Text, View, StyleSheet, Pressable} from "react-native";
 
 
 const GoalItem = (props) => {
+
     return (
-        <View style={styles.goalItem}>
-            <Text style={styles.goalText}>{props.text}</Text>
-        </View>
+        // sa putem adauga functii ca si in react pt asta folosim onPress
+        // style pt ios este o problema
+        <Pressable onPress={props.onDeleteItem.bind(this, props.id)}>
+            {/*bind() face legatura*/}
+            <View style={styles.goalItem}>
+                <Text style={styles.goalText}>{props.text}</Text>
+            </View>
+        </Pressable>
 
     );
 }
