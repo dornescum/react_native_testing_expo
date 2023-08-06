@@ -1,10 +1,10 @@
-# My React Native Project
+# Testing React Native
 
-This is a simple React Native project that uses Expo.
+This is a simple React Native project that uses Expo. from an Udemy Tutorial
 
 
-* ![SCourses](assets/Simulator_iPhone_SE.png)
-* ![SCourses](assets/Simulator_%20iPhone.png)
+* ![SCourses](assets/Simulator_iPhone_SE.jpg)
+* ![SCourses](assets/Simulator_%20iPhone.jpg)
 
 ## Getting Started
 
